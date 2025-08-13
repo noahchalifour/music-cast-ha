@@ -1,0 +1,74 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "PiAudioCast Setup",
+        "description": "Configure your PiAudioCast server connection",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "scan_interval": "Scan Interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to PiAudioCast server",
+      "invalid_host": "Invalid host or not a PiAudioCast server",
+      "timeout": "Connection timeout",
+      "unknown": "Unexpected error occurred"
+    },
+    "abort": {
+      "already_configured": "PiAudioCast server is already configured"
+    }
+  },
+  "entity": {
+    "media_player": {
+      "piaudiocast": {
+        "name": "PiAudioCast"
+      }
+    },
+    "switch": {
+      "auto_detection": {
+        "name": "Auto Detection"
+      },
+      "streaming": {
+        "name": "Manual Streaming"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "audio_device": {
+        "name": "Audio Input Device"
+      },
+      "cast_device": {
+        "name": "Cast Device"
+      },
+      "connected_clients": {
+        "name": "Connected Clients"
+      }
+    },
+    "number": {
+      "audio_threshold": {
+        "name": "Audio Threshold"
+      },
+      "silence_timeout": {
+        "name": "Silence Timeout"
+      }
+    },
+    "select": {
+      "audio_device_select": {
+        "name": "Audio Input Device"
+      },
+      "cast_device_select": {
+        "name": "Cast Device"
+      }
+    },
+    "button": {
+      "refresh_cast_devices": {
+        "name": "Refresh Cast Devices"
+      }
+    }
+  }
+}

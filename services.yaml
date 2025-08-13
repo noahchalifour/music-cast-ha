@@ -1,0 +1,46 @@
+set_audio_device:
+  name: Set Audio Device
+  description: Set the audio input device for PiAudioCast
+  fields:
+    device_index:
+      name: Device Index
+      description: Index of the audio input device
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 0
+          max: 50
+          mode: box
+
+connect_cast_device:
+  name: Connect Cast Device
+  description: Connect to a Google Cast device
+  fields:
+    device_uuid:
+      name: Device UUID
+      description: UUID of the cast device to connect to
+      required: true
+      example: "12345678-1234-1234-1234-123456789012"
+      selector:
+        text:
+
+start_auto_detection:
+  name: Start Auto Detection
+  description: Start automatic audio detection and streaming
+
+stop_auto_detection:
+  name: Stop Auto Detection
+  description: Stop automatic audio detection
+
+start_streaming:
+  name: Start Manual Streaming
+  description: Start manual audio streaming
+
+stop_streaming:
+  name: Stop Streaming
+  description: Stop audio streaming
+
+refresh_cast_devices:
+  name: Refresh Cast Devices
+  description: Refresh the list of available Google Cast devices
