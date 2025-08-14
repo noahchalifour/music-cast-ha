@@ -1,3 +1,5 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
+
 # PiAudioCast Home Assistant Integration
 
 This integration allows you to control and configure a PiAudioCast server from Home Assistant.

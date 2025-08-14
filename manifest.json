@@ -11,5 +11,6 @@
     "voluptuous>=0.13.0"
   ],
   "config_flow": true,
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "integration_type": "device"
 }
