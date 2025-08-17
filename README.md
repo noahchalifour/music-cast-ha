@@ -33,13 +33,22 @@ This integration allows you to control and configure a PiAudioCast server from H
 ### Buttons
 - **Refresh Cast Devices**: Force refresh the list of available cast devices
 
-## Installation
+## Installation via HACS
 
-1. Copy the `piaudiocast` folder to your Home Assistant `custom_components` directory
-2. Restart Home Assistant
-3. Go to Configuration > Integrations
-4. Click "Add Integration" and search for "PiAudioCast"
-5. Enter your PiAudioCast server's host and port (default: localhost:8000)
+1. Ensure that [HACS](https://hacs.xyz/) is installed
+2. Add this repository to HACS as a custom repository (if not in default HACS store)
+3. Search for "PiAudioCast" in HACS and install
+4. Restart Home Assistant
+5. Go to Configuration > Integrations
+6. Click "Add Integration" and search for "PiAudioCast"
+7. Enter your PiAudioCast server's host and port (default: localhost:8000)
+
+## Manual Installation
+
+1. Download the latest release from GitHub
+2. Copy the `piaudiocast` folder to your Home Assistant `custom_components` directory
+3. Restart Home Assistant
+4. Follow steps 5-7 from HACS installation
 
 ## Configuration
 

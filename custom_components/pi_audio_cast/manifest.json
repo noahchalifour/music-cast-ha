@@ -2,10 +2,12 @@
   "domain": "piaudiocast",
   "name": "PiAudioCast",
   "version": "1.0.0",
-  "documentation": "https://github.com/yourusername/piaudiocast",
-  "issue_tracker": "https://github.com/yourusername/piaudiocast/issues",
+  "documentation": "https://github.com/noahchalifour/pi-audio-cast-ha-integration",
+  "issue_tracker": "https://github.com/noahchalifour/pi-audio-cast-ha-integration/issues",
   "dependencies": [],
-  "codeowners": ["@yourusername"],
+  "codeowners": [
+    "@noahchalifour"
+  ],
   "requirements": [
     "aiohttp>=3.8.0",
     "voluptuous>=0.13.0"
