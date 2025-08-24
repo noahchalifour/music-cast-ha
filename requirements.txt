@@ -1,0 +1,13 @@
+# Home Assistant Integration Requirements
+aiohttp>=3.8.0
+voluptuous>=0.13.0
+
+# Development dependencies
+homeassistant
+pytest>=7.0.0
+pytest-homeassistant-custom-component
+black
+flake8
+pylint
+isort
+pre-commit

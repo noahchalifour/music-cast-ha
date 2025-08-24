@@ -1,4 +1,4 @@
-"""Number entities for PiAudioCast integration."""
+"""Number entities for MusicCast integration."""
 
 import logging
 from typing import Optional
@@ -17,7 +17,7 @@ from .const import (
     SILENCE_TIMEOUT_MIN,
     SILENCE_TIMEOUT_MAX,
 )
-from .coordinator import PiAudioCastCoordinator
+from .coordinator import MusicCastCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -27,30 +27,30 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up PiAudioCast number entities from a config entry."""
-    coordinator: PiAudioCastCoordinator = hass.data[DOMAIN][entry.entry_id]
+    """Set up MusicCast number entities from a config entry."""
+    coordinator: MusicCastCoordinator = hass.data[DOMAIN][entry.entry_id]
     
     async_add_entities([
-        PiAudioCastAudioThresholdNumber(coordinator, entry),
-        PiAudioCastSilenceTimeoutNumber(coordinator, entry),
+        MusicCastAudioThresholdNumber(coordinator, entry),
+        MusicCastSilenceTimeoutNumber(coordinator, entry),
     ])
 
 
-class PiAudioCastNumberBase(CoordinatorEntity, NumberEntity):
-    """Base class for PiAudioCast number entities."""
+class MusicCastNumberBase(CoordinatorEntity, NumberEntity):
+    """Base class for MusicCast number entities."""
 
     _attr_has_entity_name = True
     _attr_entity_category = EntityCategory.CONFIG
     _attr_mode = NumberMode.BOX
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the number entity."""
         super().__init__(coordinator)
         
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
-            name=f"PiAudioCast ({coordinator.host})",
-            manufacturer="PiAudioCast",
+            name=f"MusicCast ({coordinator.host})",
+            manufacturer="MusicCast",
             model="Audio Cast Server",
             sw_version="1.0.0",
             configuration_url=coordinator.base_url,
@@ -62,7 +62,7 @@ class PiAudioCastNumberBase(CoordinatorEntity, NumberEntity):
         return self.coordinator.last_update_success
 
 
-class PiAudioCastAudioThresholdNumber(PiAudioCastNumberBase):
+class MusicCastAudioThresholdNumber(MusicCastNumberBase):
     """Number entity for audio detection threshold."""
 
     _attr_name = "Audio Threshold"
@@ -72,7 +72,7 @@ class PiAudioCastAudioThresholdNumber(PiAudioCastNumberBase):
     _attr_native_step = 0.001
     _attr_native_unit_of_measurement = None
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the audio threshold number."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_audio_threshold"
@@ -93,7 +93,7 @@ class PiAudioCastAudioThresholdNumber(PiAudioCastNumberBase):
         await self.coordinator.async_request_refresh()
 
 
-class PiAudioCastSilenceTimeoutNumber(PiAudioCastNumberBase):
+class MusicCastSilenceTimeoutNumber(MusicCastNumberBase):
     """Number entity for silence timeout."""
 
     _attr_name = "Silence Timeout"
@@ -103,7 +103,7 @@ class PiAudioCastSilenceTimeoutNumber(PiAudioCastNumberBase):
     _attr_native_step = 0.5
     _attr_native_unit_of_measurement = "s"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the silence timeout number."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_silence_timeout"

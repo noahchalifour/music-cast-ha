@@ -1,6 +1,6 @@
-"""Constants for the PiAudioCast integration."""
+"""Constants for the MusicCast integration."""
 
-DOMAIN = "piaudiocast"
+DOMAIN = "musiccast"
 
 DEFAULT_PORT = 8000
 DEFAULT_HOST = "localhost"

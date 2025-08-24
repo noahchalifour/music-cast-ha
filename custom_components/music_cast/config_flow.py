@@ -1,4 +1,4 @@
-"""Config flow for PiAudioCast integration."""
+"""Config flow for MusicCast integration."""
 
 import asyncio
 import logging
@@ -32,8 +32,8 @@ DATA_SCHEMA = vol.Schema({
 })
 
 
-class PiAudioCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for PiAudioCast."""
+class MusicCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Handle a config flow for MusicCast."""
 
     VERSION = 1
 
@@ -54,7 +54,7 @@ class PiAudioCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if error:
                 errors["base"] = error
             else:
-                title = f"PiAudioCast ({host}:{port})"
+                title = f"MusicCast ({host}:{port})"
                 return self.async_create_entry(title=title, data=user_input)
 
         return self.async_show_form(
@@ -64,7 +64,7 @@ class PiAudioCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def _test_connection(self, host: str, port: int) -> Optional[str]:
-        """Test if we can connect to the PiAudioCast server."""
+        """Test if we can connect to the MusicCast server."""
         session = async_get_clientsession(self.hass)
         url = f"http://{host}:{port}/"
         
@@ -73,7 +73,7 @@ class PiAudioCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 async with session.get(url) as response:
                     if response.status == 200:
                         data = await response.json()
-                        if "PyAudioCast" in data.get("message", ""):
+                        if "MusicCast" in data.get("message", ""):
                             return None
                         else:
                             return ERROR_INVALID_HOST
@@ -84,5 +84,5 @@ class PiAudioCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         except aiohttp.ClientError:
             return ERROR_CANNOT_CONNECT
         except Exception as ex:
-            _LOGGER.exception("Unexpected error connecting to PiAudioCast: %s", ex)
+            _LOGGER.exception("Unexpected error connecting to MusicCast: %s", ex)
             return ERROR_CANNOT_CONNECT

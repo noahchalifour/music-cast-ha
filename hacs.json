@@ -1,7 +1,9 @@
 {
-  "name": "PiAudioCast",
+  "name": "MusicCast",
   "hacs": "1.32.0",
-  "domains": ["piaudiocast"],
+  "domains": [
+    "musiccast"
+  ],
   "iot_class": "Local Polling",
   "homeassistant": "2024.1.0"
 }

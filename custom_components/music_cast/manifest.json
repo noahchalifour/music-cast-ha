@@ -1,9 +1,9 @@
 {
-  "domain": "piaudiocast",
-  "name": "PiAudioCast",
+  "domain": "musiccast",
+  "name": "MusicCast",
   "version": "1.0.0",
-  "documentation": "https://github.com/noahchalifour/pi-audio-cast-ha-integration",
-  "issue_tracker": "https://github.com/noahchalifour/pi-audio-cast-ha-integration/issues",
+  "documentation": "https://github.com/noahchalifour/music-cast-ha",
+  "issue_tracker": "https://github.com/noahchalifour/music-cast-ha/issues",
   "dependencies": [],
   "codeowners": [
     "@noahchalifour"

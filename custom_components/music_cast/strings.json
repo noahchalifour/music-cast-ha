@@ -2,8 +2,8 @@
   "config": {
     "step": {
       "user": {
-        "title": "PiAudioCast Setup",
-        "description": "Configure your PiAudioCast server connection",
+        "title": "MusicCast Setup",
+        "description": "Configure your MusicCast server connection",
         "data": {
           "host": "Host",
           "port": "Port",
@@ -12,19 +12,19 @@
       }
     },
     "error": {
-      "cannot_connect": "Failed to connect to PiAudioCast server",
-      "invalid_host": "Invalid host or not a PiAudioCast server",
+      "cannot_connect": "Failed to connect to MusicCast server",
+      "invalid_host": "Invalid host or not a MusicCast server",
       "timeout": "Connection timeout",
       "unknown": "Unexpected error occurred"
     },
     "abort": {
-      "already_configured": "PiAudioCast server is already configured"
+      "already_configured": "MusicCast server is already configured"
     }
   },
   "entity": {
     "media_player": {
-      "piaudiocast": {
-        "name": "PiAudioCast"
+      "musiccast": {
+        "name": "MusicCast"
       }
     },
     "switch": {

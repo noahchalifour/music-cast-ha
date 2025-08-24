@@ -1,13 +1,13 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 
-# PiAudioCast Home Assistant Integration
+# MusicCast Home Assistant Integration
 
-This integration allows you to control and configure a PiAudioCast server from Home Assistant.
+This integration allows you to control and configure a MusicCast server from Home Assistant.
 
 ## Features
 
 ### Media Player
-- Main control interface for PiAudioCast
+- Main control interface for MusicCast
 - Turn on/off auto detection
 - Volume control and muting
 - Shows current streaming status
@@ -37,23 +37,23 @@ This integration allows you to control and configure a PiAudioCast server from H
 
 1. Ensure that [HACS](https://hacs.xyz/) is installed
 2. Add this repository to HACS as a custom repository (if not in default HACS store)
-3. Search for "PiAudioCast" in HACS and install
+3. Search for "MusicCast" in HACS and install
 4. Restart Home Assistant
 5. Go to Configuration > Integrations
-6. Click "Add Integration" and search for "PiAudioCast"
-7. Enter your PiAudioCast server's host and port (default: localhost:8000)
+6. Click "Add Integration" and search for "MusicCast"
+7. Enter your MusicCast server's host and port (default: localhost:8000)
 
 ## Manual Installation
 
 1. Download the latest release from GitHub
-2. Copy the `piaudiocast` folder to your Home Assistant `custom_components` directory
+2. Copy the `musiccast` folder to your Home Assistant `custom_components` directory
 3. Restart Home Assistant
 4. Follow steps 5-7 from HACS installation
 
 ## Configuration
 
 The integration requires:
-- **Host**: IP address or hostname of your PiAudioCast server
+- **Host**: IP address or hostname of your MusicCast server
 - **Port**: Port number (default: 8000)
 - **Scan Interval**: How often to poll the server for updates (default: 30 seconds)
 
@@ -61,13 +61,13 @@ The integration requires:
 
 The integration provides several services for automation:
 
-- `piaudiocast.set_audio_device`: Set the audio input device
-- `piaudiocast.connect_cast_device`: Connect to a specific cast device
-- `piaudiocast.start_auto_detection`: Start auto detection
-- `piaudiocast.stop_auto_detection`: Stop auto detection
-- `piaudiocast.start_streaming`: Start manual streaming
-- `piaudiocast.stop_streaming`: Stop streaming
-- `piaudiocast.refresh_cast_devices`: Refresh cast devices list
+- `musiccast.set_audio_device`: Set the audio input device
+- `musiccast.connect_cast_device`: Connect to a specific cast device
+- `musiccast.start_auto_detection`: Start auto detection
+- `musiccast.stop_auto_detection`: Stop auto detection
+- `musiccast.start_streaming`: Start manual streaming
+- `musiccast.stop_streaming`: Stop streaming
+- `musiccast.refresh_cast_devices`: Refresh cast devices list
 
 ## Example Automation
 
@@ -81,7 +81,7 @@ automation:
         to: "on"
     action:
       - service: switch.turn_on
-        entity_id: switch.piaudiocast_auto_detection
+        entity_id: switch.musiccast_auto_detection
 
 # Stop streaming when no motion for 10 minutes
   - alias: "Stop audio streaming after motion timeout"
@@ -93,13 +93,13 @@ automation:
           minutes: 10
     action:
       - service: switch.turn_off
-        entity_id: switch.piaudiocast_auto_detection
+        entity_id: switch.musiccast_auto_detection
 ```
 
 ## Troubleshooting
 
 ### Connection Issues
-- Ensure your PiAudioCast server is running and accessible
+- Ensure your MusicCast server is running and accessible
 - Check that the host and port are correct
 - Verify firewall settings allow connections to the server
 
@@ -107,7 +107,7 @@ automation:
 - Check that an audio input device is selected
 - Verify a Google Cast device is connected
 - Adjust the audio threshold if needed
-- Check the PiAudioCast server logs for errors
+- Check the MusicCast server logs for errors
 
 ### Cast Device Not Found
 - Use the "Refresh Cast Devices" button to rediscover devices

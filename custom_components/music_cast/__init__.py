@@ -1,4 +1,4 @@
-"""PiAudioCast integration for Home Assistant."""
+"""MusicCast integration for Home Assistant."""
 
 import logging
 from homeassistant.config_entries import ConfigEntry
@@ -7,7 +7,7 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.const import Platform
 
 from .const import DOMAIN
-from .coordinator import PiAudioCastCoordinator
+from .coordinator import MusicCastCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -15,11 +15,11 @@ PLATFORMS = [Platform.MEDIA_PLAYER, Platform.SWITCH, Platform.SENSOR, Platform.N
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up PiAudioCast from a config entry."""
-    coordinator = PiAudioCastCoordinator(hass, entry)
+    """Set up MusicCast from a config entry."""
+    coordinator = MusicCastCoordinator(hass, entry)
 
     if not await coordinator.async_setup():
-        raise ConfigEntryNotReady("Failed to connect to PiAudioCast server")
+        raise ConfigEntryNotReady("Failed to connect to MusicCast server")
 
     await coordinator.async_config_entry_first_refresh()
 

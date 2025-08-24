@@ -1,4 +1,4 @@
-"""Sensor entities for PiAudioCast integration."""
+"""Sensor entities for MusicCast integration."""
 
 import logging
 from typing import Any, Optional
@@ -11,7 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
-from .coordinator import PiAudioCastCoordinator
+from .coordinator import MusicCastCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -21,31 +21,31 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up PiAudioCast sensors from a config entry."""
-    coordinator: PiAudioCastCoordinator = hass.data[DOMAIN][entry.entry_id]
+    """Set up MusicCast sensors from a config entry."""
+    coordinator: MusicCastCoordinator = hass.data[DOMAIN][entry.entry_id]
     
     async_add_entities([
-        PiAudioCastStatusSensor(coordinator, entry),
-        PiAudioCastAudioDeviceSensor(coordinator, entry),
-        PiAudioCastCastDeviceSensor(coordinator, entry),
-        PiAudioCastConnectedClientsSensor(coordinator, entry),
+        MusicCastStatusSensor(coordinator, entry),
+        MusicCastAudioDeviceSensor(coordinator, entry),
+        MusicCastCastDeviceSensor(coordinator, entry),
+        MusicCastConnectedClientsSensor(coordinator, entry),
     ])
 
 
-class PiAudioCastSensorBase(CoordinatorEntity, SensorEntity):
-    """Base class for PiAudioCast sensors."""
+class MusicCastSensorBase(CoordinatorEntity, SensorEntity):
+    """Base class for MusicCast sensors."""
 
     _attr_has_entity_name = True
     _attr_entity_category = EntityCategory.DIAGNOSTIC
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)
         
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
-            name=f"PiAudioCast ({coordinator.host})",
-            manufacturer="PiAudioCast",
+            name=f"MusicCast ({coordinator.host})",
+            manufacturer="MusicCast",
             model="Audio Cast Server",
             sw_version="1.0.0",
             configuration_url=coordinator.base_url,
@@ -57,13 +57,13 @@ class PiAudioCastSensorBase(CoordinatorEntity, SensorEntity):
         return self.coordinator.last_update_success
 
 
-class PiAudioCastStatusSensor(PiAudioCastSensorBase):
-    """Sensor showing overall PiAudioCast status."""
+class MusicCastStatusSensor(MusicCastSensorBase):
+    """Sensor showing overall MusicCast status."""
 
     _attr_name = "Status"
     _attr_icon = "mdi:information"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the status sensor."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_status"
@@ -102,13 +102,13 @@ class PiAudioCastStatusSensor(PiAudioCastSensorBase):
         }
 
 
-class PiAudioCastAudioDeviceSensor(PiAudioCastSensorBase):
+class MusicCastAudioDeviceSensor(MusicCastSensorBase):
     """Sensor showing current audio input device."""
 
     _attr_name = "Audio Input Device"
     _attr_icon = "mdi:microphone"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the audio device sensor."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_audio_device"
@@ -153,13 +153,13 @@ class PiAudioCastAudioDeviceSensor(PiAudioCastSensorBase):
         return attrs
 
 
-class PiAudioCastCastDeviceSensor(PiAudioCastSensorBase):
+class MusicCastCastDeviceSensor(MusicCastSensorBase):
     """Sensor showing current cast device."""
 
     _attr_name = "Cast Device"
     _attr_icon = "mdi:cast"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the cast device sensor."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_cast_device"
@@ -198,7 +198,7 @@ class PiAudioCastCastDeviceSensor(PiAudioCastSensorBase):
         return attrs
 
 
-class PiAudioCastConnectedClientsSensor(PiAudioCastSensorBase):
+class MusicCastConnectedClientsSensor(MusicCastSensorBase):
     """Sensor showing number of connected audio clients."""
 
     _attr_name = "Connected Clients"
@@ -206,7 +206,7 @@ class PiAudioCastConnectedClientsSensor(PiAudioCastSensorBase):
     _attr_state_class = SensorStateClass.MEASUREMENT
     _attr_native_unit_of_measurement = "clients"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the connected clients sensor."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_connected_clients"

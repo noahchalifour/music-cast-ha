@@ -1,4 +1,4 @@
-"""Select entities for PiAudioCast integration."""
+"""Select entities for MusicCast integration."""
 
 import logging
 from typing import Optional
@@ -11,7 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
-from .coordinator import PiAudioCastCoordinator
+from .coordinator import MusicCastCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -21,29 +21,29 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up PiAudioCast select entities from a config entry."""
-    coordinator: PiAudioCastCoordinator = hass.data[DOMAIN][entry.entry_id]
+    """Set up MusicCast select entities from a config entry."""
+    coordinator: MusicCastCoordinator = hass.data[DOMAIN][entry.entry_id]
     
     async_add_entities([
-        PiAudioCastAudioDeviceSelect(coordinator, entry),
-        PiAudioCastCastDeviceSelect(coordinator, entry),
+        MusicCastAudioDeviceSelect(coordinator, entry),
+        MusicCastCastDeviceSelect(coordinator, entry),
     ])
 
 
-class PiAudioCastSelectBase(CoordinatorEntity, SelectEntity):
-    """Base class for PiAudioCast select entities."""
+class MusicCastSelectBase(CoordinatorEntity, SelectEntity):
+    """Base class for MusicCast select entities."""
 
     _attr_has_entity_name = True
     _attr_entity_category = EntityCategory.CONFIG
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the select entity."""
         super().__init__(coordinator)
         
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
-            name=f"PiAudioCast ({coordinator.host})",
-            manufacturer="PiAudioCast",
+            name=f"MusicCast ({coordinator.host})",
+            manufacturer="MusicCast",
             model="Audio Cast Server",
             sw_version="1.0.0",
             configuration_url=coordinator.base_url,
@@ -55,13 +55,13 @@ class PiAudioCastSelectBase(CoordinatorEntity, SelectEntity):
         return self.coordinator.last_update_success
 
 
-class PiAudioCastAudioDeviceSelect(PiAudioCastSelectBase):
+class MusicCastAudioDeviceSelect(MusicCastSelectBase):
     """Select entity for audio input device."""
 
     _attr_name = "Audio Input Device"
     _attr_icon = "mdi:microphone"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the audio device select."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_audio_device_select"
@@ -112,13 +112,13 @@ class PiAudioCastAudioDeviceSelect(PiAudioCastSelectBase):
             await self.coordinator.async_request_refresh()
 
 
-class PiAudioCastCastDeviceSelect(PiAudioCastSelectBase):
+class MusicCastCastDeviceSelect(MusicCastSelectBase):
     """Select entity for cast device."""
 
     _attr_name = "Cast Device"
     _attr_icon = "mdi:cast"
 
-    def __init__(self, coordinator: PiAudioCastCoordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: MusicCastCoordinator, entry: ConfigEntry) -> None:
         """Initialize the cast device select."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_cast_device_select"

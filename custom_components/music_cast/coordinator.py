@@ -1,4 +1,4 @@
-"""Coordinator for PiAudioCast integration."""
+"""Coordinator for MusicCast integration."""
 
 import asyncio
 import logging
@@ -18,8 +18,8 @@ from .const import CONF_SCAN_INTERVAL, DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 
-class PiAudioCastCoordinator(DataUpdateCoordinator):
-    """Class to manage fetching PiAudioCast data."""
+class MusicCastCoordinator(DataUpdateCoordinator):
+    """Class to manage fetching MusicCast data."""
 
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
         """Initialize coordinator."""
@@ -43,11 +43,11 @@ class PiAudioCastCoordinator(DataUpdateCoordinator):
             await self._async_test_connection()
             return True
         except Exception as ex:
-            _LOGGER.error("Failed to setup PiAudioCast coordinator: %s", ex)
+            _LOGGER.error("Failed to setup MusicCast coordinator: %s", ex)
             return False
 
     async def _async_test_connection(self) -> None:
-        """Test connection to PiAudioCast server."""
+        """Test connection to MusicCast server."""
         try:
             with async_timeout.timeout(10):
                 async with self.session.get(f"{self.base_url}/") as response:
@@ -55,7 +55,7 @@ class PiAudioCastCoordinator(DataUpdateCoordinator):
                         raise UpdateFailed(f"Server returned status {response.status}")
                     
                     data = await response.json()
-                    if "PyAudioCast" not in data.get("message", ""):
+                    if "MusicCast" not in data.get("message", ""):
                         raise UpdateFailed("Invalid server response")
         except asyncio.TimeoutError as ex:
             raise UpdateFailed("Timeout connecting to server") from ex
@@ -63,7 +63,7 @@ class PiAudioCastCoordinator(DataUpdateCoordinator):
             raise UpdateFailed(f"Connection error: {ex}") from ex
 
     async def _async_update_data(self) -> Dict[str, Any]:
-        """Fetch data from PiAudioCast server."""
+        """Fetch data from MusicCast server."""
         try:
             with async_timeout.timeout(10):
                 # Get status
