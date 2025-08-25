@@ -19,21 +19,3 @@ RUN apt-get update && apt-get install -y \
 # Set timezone
 ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Create workspace directory
-WORKDIR /workspace
-
-# Copy requirements if they exist
-COPY requirements.txt* ./
-RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-# Install Home Assistant and development dependencies
-RUN pip install \
-    homeassistant \
-    pytest \
-    pytest-homeassistant-custom-component \
-    black \
-    flake8 \
-    pylint \
-    isort \
-    pre-commit
