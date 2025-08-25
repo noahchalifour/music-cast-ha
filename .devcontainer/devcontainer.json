@@ -1,6 +1,8 @@
 {
   "name": "MusicCast HA Integration",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
   },
